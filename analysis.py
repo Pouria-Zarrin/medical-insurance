@@ -1,4 +1,5 @@
 import csv
+import math
 with open('C:/Users/pouria zarrin/Desktop/medical-insurance/insurance.csv' , newline='') as insurance_data:
     data = list(csv.DictReader(insurance_data))
 
