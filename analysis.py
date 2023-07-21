@@ -13,6 +13,7 @@ def cost_average():
         counter += 1
     return (all_cost/counter)
 
+
 #average cost of female and male
 def gender_analysis():
     men_counter = 0
@@ -68,5 +69,34 @@ def region_analysis():
     print (north_west,'individuals in north_west')
     print (south_east,'individuals in south_east')
     print (south_west,'individuals in south_west')
-region_analysis()
-        
+
+#average insurance costs of individuals with different number of children
+def child_analysis():
+    children_count = {}
+    children_cost = {}
+    children_cost_average = {}
+    for individual in data:
+        x = individual['children']
+        if x in children_count :
+            children_count[x] += 1
+        else :
+            children_count[x] = 1
+        if x in children_cost :
+            children_cost[x] += round(float(individual['charges']))
+        else :
+            children_cost[x] = round(float(individual['charges']))
+    child_index_cost_value = list(children_cost.values())
+    child_index_cost_keys = list(children_cost.keys())
+    child_index_count = list(children_count.values())
+    count = 0
+    for individual in child_index_cost_keys:
+        children_cost[individual] = round(float(child_index_cost_value[count] / child_index_count[count]))
+        count += 1
+
+
+    child_index_cost_value = list(children_cost.values())
+    child_data = []
+    for i in range(len(child_index_cost_keys)):
+        print ('there are' , child_index_count[i] , 'people with' , child_index_cost_keys[i] , 'number of children that have' , child_index_cost_value[i] , 'average of insurance expenses')
+        child_data.append({'children':int(child_index_cost_keys[i]) , 'individuals':child_index_count[i] , 'average cost':child_index_cost_value[i]})
+child_analysis()
